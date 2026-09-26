@@ -94,6 +94,37 @@ def main():
     print(f"MSE : {mse_multi:.3f}")
     print(f"RMSE : {rmse_multi:.3f}")
     print(f"R² : {r2_multi:.3f}")
+    print("\nCoefficients du modèle multiple :")
+    coefficients = pd.Series(
+        multi_model.coef_,
+        index=X_multi.columns
+    ).sort_values(ascending=False)
+    print(coefficients)
+    print("\nVariables les plus importantes en valeur absolue :")
+    coefficients_abs = coefficients.abs().sort_values(ascending=False)
+    print(coefficients_abs)
+
+    print("\nComparaison des modèles :")
+    model_comparison = pd.DataFrame({
+        "model": [
+            "Simple linear regression",
+            "Multiple linear regression"
+        ],
+        "mse": [
+            mse,
+            mse_multi
+        ],
+        "rmse": [
+            rmse,
+            rmse_multi
+        ],
+        "r2": [
+            r2,
+            r2_multi
+        ]
+    })
+
+    print(model_comparison)
 
 if __name__ == "__main__":
     main()
