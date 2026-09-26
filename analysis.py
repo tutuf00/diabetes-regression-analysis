@@ -22,6 +22,9 @@ def main():
     print("\nVariables disponibles :")
     print(data.columns.tolist())
 
+    print("\nStatistiques descriptives :")
+    print(data.describe())
+
 
 if __name__ == "__main__":
     main()
