@@ -3,6 +3,7 @@ from sklearn.linear_model import LinearRegression
 from sklearn.metrics import mean_squared_error, root_mean_squared_error, r2_score
 from sklearn.model_selection import train_test_split
 import pandas as pd
+import matplotlib.pyplot as plt
 
 def main():
     # 1. Chargement du dataset
@@ -126,5 +127,17 @@ def main():
 
     print(model_comparison)
 
+    print("\nSauvegarde du graphique de comparaison des modèles...")
+
+    plt.figure()
+    plt.bar(model_comparison["model"], model_comparison["rmse"])
+    plt.ylabel("RMSE")
+    plt.title("Comparaison des modèles par RMSE")
+    plt.xticks(rotation=15)
+    plt.tight_layout()
+    plt.savefig("outputs/model_comparison_rmse.png")
+    plt.close()
+
+    print("Graphique sauvegardé dans outputs/model_comparison_rmse.png")
 if __name__ == "__main__":
     main()
