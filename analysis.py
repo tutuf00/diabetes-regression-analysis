@@ -25,6 +25,9 @@ def main():
     print("\nStatistiques descriptives :")
     print(data.describe())
 
+    print("\nCorrélations avec la variable cible :")
+    correlations = data.corr()["target"].sort_values(ascending=False)
+    print(correlations)
 
 if __name__ == "__main__":
     main()
