@@ -63,5 +63,37 @@ def main():
     print(f"RMSE : {rmse:.3f}")
     print(f"R² : {r2:.3f}")
 
+
+    print("\nRégression linéaire multiple : target ~ toutes les variables")
+
+    # Toutes les variables explicatives
+    X_multi = data.drop(columns=["target"])
+    y_multi = data["target"]
+
+    # Séparation train/test
+    X_train_multi, X_test_multi, y_train_multi, y_test_multi = train_test_split(
+        X_multi,
+        y_multi,
+        test_size=0.2,
+        random_state=42
+    )
+
+    # Création et entraînement du modèle
+    multi_model = LinearRegression()
+    multi_model.fit(X_train_multi, y_train_multi)
+
+    # Prédictions
+    y_pred_multi = multi_model.predict(X_test_multi)
+
+    # Évaluation
+    mse_multi = mean_squared_error(y_test_multi, y_pred_multi)
+    rmse_multi = root_mean_squared_error(y_test_multi, y_pred_multi)
+    r2_multi = r2_score(y_test_multi, y_pred_multi)
+
+    print(f"Intercept : {multi_model.intercept_:.3f}")
+    print(f"MSE : {mse_multi:.3f}")
+    print(f"RMSE : {rmse_multi:.3f}")
+    print(f"R² : {r2_multi:.3f}")
+
 if __name__ == "__main__":
     main()
